@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Text;
 using System.Xml.Linq;
+using cw2.Models;
 
 namespace cw2
 {
@@ -16,16 +17,16 @@ namespace cw2
         public static async Task Main(string[] args)
         {
             //default
-            var pathFile = "data.csv";
-            var pathResult = "result.xml";
+            var pathFile = @"C:\Users\admn\Desktop\dane.csv";
+            var pathResult = @"C:\Users\admn\Desktop\result.xml";
             var type = "xml";
+
             var lines = File.ReadLines(pathFile);
-            var logPath = @"C:\Users\peacr\Desktop\log.txt";   //log, used for errors (ArgumentException()/FileNotFoundException())
+            var logPath = @"C:\Users\admn\Desktop\log.txt";  
 
             if (!File.Exists(logPath))
             {
-                throw new FileNotFoundException("Podana sciezka jest niepoprawna");
-                
+                using FileStream fs = File.Create(logPath);
             }
             using FileStream streamToLogs = File.OpenWrite(logPath);
 
@@ -73,68 +74,10 @@ namespace cw2
                 }
                 
             }
-            
-
-            
-
-
-
-
-
-
-
-
 
             //====================================================================================
 
-            try
-            {
-                
-
-               
-
-                //args.Length == 3 ? args[0] : "https://www.pja.edu.pl";
-
-                var client = new HttpClient();
-                var result = await client.GetAsync("https://www.pja.edu.pl");
-
-                if (!result.IsSuccessStatusCode) return;
-
-                String html = await result.Content.ReadAsStringAsync();
-
-                var regex = new Regex("[a-z]+[az0-9]*@[a-z.]+");
-                var matches = regex.Matches(html);
-                var set = new HashSet<string>();
-
-                // LINQ
-                var list = new List<string>();
-                var elementy = from e in list
-                               where e.StartsWith("A")
-                               select e;
-                //sk³adnia bardziej jak w java
-                var elementy2 = list.Where(s => s.StartsWith("A"));
-
-
-
-
-
-
-                var slownik = new Dictionary<string, string>();
-
-                foreach (var m in matches)
-                {
-                    Console.WriteLine(m);
-                }
-
-            }
-            catch (Exception exc)
-            {
-                Console.WriteLine("Wystapil blad " + exc.ToString());
-            }
-
-
-
-            Console.WriteLine("Koniec!");
+           
         }
     }
 }

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿using System.Dynamic;
 using System.Xml.Serialization;
 
@@ -15,5 +16,16 @@ namespace cw2.Models
         [XmlAttribute("numberOfStudents")]
         public string Number { get; set; }
         public Studies() { }
+=======
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace cw2.Models
+{
+    public class Studies
+    {
+>>>>>>> 1968c43e53ea1cee18756e14f6e480547639a703
     }
 }
