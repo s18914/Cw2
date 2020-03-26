@@ -9,6 +9,7 @@ using System.IO;
 using System.Text;
 using System.Xml.Linq;
 using cw2.Models;
+using Cw2.Models;
 
 namespace cw2
 {
@@ -17,12 +18,12 @@ namespace cw2
         public static async Task Main(string[] args)
         {
             //default
-            var pathFile = @"C:\Users\admn\Desktop\dane.csv";
-            var pathResult = @"C:\Users\admn\Desktop\result.xml";
+            var pathFile = @"dane.csv";
+            var pathResult = @"result.xml";
             var type = "xml";
 
             var lines = File.ReadLines(pathFile);
-            var logPath = @"C:\Users\admn\Desktop\log.txt";  
+            var logPath = @"log.txt";  
 
             if (!File.Exists(logPath))
             {
@@ -76,8 +77,45 @@ namespace cw2
             }
 
             //====================================================================================
+            var fi = new FileInfo(pathFile);
+            
+                using (var stream = new StreamReader(fi.OpenRead()))
+                {
+                    string line = "";
+                    Boolean duplicate;
+                    var list = new List<Cw2.Models.Student>();
+                    while ((line = stream.ReadLine()) != null)
+                    {
+                        string[] column = line.Split(',');
+                        foreach (Student s in list)
+                        {
+                            //duplicate
+                            string index = column[4];
+                            if (string.Equals(s.Imie, column[0]) && string.Equals(s.Nazwisko, column[1]) &&
+                                string.Equals(s.Indeks, index))
+                            {
+                                duplicate = true;
+                            }
+                        }
+                    }
+                }
+            
+            
 
-           
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         }
     }
 }

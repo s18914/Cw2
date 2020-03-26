@@ -1,59 +1,39 @@
 ﻿using System;
-<<<<<<< HEAD
 using System.Xml.Serialization;
 
 namespace Cw2.Models
 {
-    [XmlRoot("student")]
     public class Student
     {
-        [XmlAttribute(attributeName: "indexNumber")]
-        public string Indeks { get; set; }
-
-        [XmlElement(elementName: "fname")]
-        public string Imie { get; set; }
-
-        [XmlElement(elementName: "lname")]
-        public string Nazwisko { get; set; }
-
-        [XmlElement(elementName: "birthdate")]
-        public string DataUrodz { get; set; }
-
-        [XmlElement(elementName: "email")]
+        private string Line;
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Studies { get; set; }
+        public string StudType { get; set; }
+        public string Index { get; set; }
+        public string BirthDate { get; set; }
         public string Email { get; set; }
+        public string Mother { get; set; }
+        public string Father { get; set; }
 
-        [XmlElement(elementName: "mothersName")]
-        public string ImieMatki { get; set; }
-
-        [XmlElement(elementName: "fathersName")]
-        public string ImieOjca { get; set; }
-
-        public Studies studies { get; set; }
-
-        public Student() { }
-=======
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace cw2.Models
-{
-    public class Student
-    {
-        public int Nazwisko { get; set; }
-
-        private string imie;
-
-        public string Imie
+        public Student(string line)
         {
-            get { return imie; }
-            set
-            {
-                if (value == null) throw new ArgumentException();
-                imie = value;
-            }
+            this.Line = line;
+            var stud = line.Split(",");
+            this.FirstName = stud[0];
+            this.LastName = stud[1];
+            this.Studies = stud[2];
+            this.StudType = stud[3];
+            this.Index = stud[4];
+            this.BirthDate = stud[5];
+            this.Email = stud[6];
+            this.Mother = stud[7];
+            this.Father = stud[8];
         }
 
->>>>>>> 1968c43e53ea1cee18756e14f6e480547639a703
+        public override string ToString()
+        {
+            return Line;
+        }
     }
 }
